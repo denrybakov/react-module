@@ -1,70 +1,84 @@
-import { nanoid } from 'nanoid'
 import { Header } from '../Header/Header'
 import { Button } from '../Button/Button'
-import { Error } from '../Error/Error'
-import { List } from '../List/List'
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
+import data from '../../data/data.json'
 
 import styles from './App.module.css';
 
-const initialState = { value: '', list: [], error: '' }
+const initialState = {
+  steps: data,
+  activeIndex: 1,
+  lastStep: data?.length
+}
 
 export const App = () => {
-  const [state, setState] = useState({})
+  const [state, setState] = useState(initialState)
 
-  useEffect(() => {
+  const handlePrev = () => {
+    setState(prevState => ({
+      ...prevState,
+      activeIndex: prevState.activeIndex - 1
+    }))
+  }
+
+  const handleNext = () => {
+    setState(prevState => ({
+      ...prevState,
+      activeIndex: prevState.activeIndex + 1
+    }))
+  }
+
+  const handleReboot = () => {
     setState(initialState)
-  }, [])
-
-  const onInputButtonClick = (e) => {
-    const question = prompt('Введите значение')?.trim()
-    question?.length >= 3
-      ? setState(prevState => ({ ...prevState, value: question, error: '' }))
-      : setState(prevState => ({
-        ...prevState,
-        error: 'Введенное значение должно содержать минимум 3 символа'
-      }))
   }
 
-  const onAddButtonClick = () => {
-    if (state.value) {
-      const id = nanoid()
-      const value = state.value
-      setState(prevState => ({
-        ...prevState,
-        list: [...state.list, { id, value }],
-        value: '',
-        error: ''
-      }))
-    }
+  const handleCircleClick = (step) => {
+    setState(prevState => ({ ...prevState, activeIndex: step }))
   }
+
+  const renderStepsList = useMemo(() => (
+    state.steps.map(({ id, title }, i) => (
+      <li
+        className={`${styles['steps-item']} ${state.activeIndex > i + 1
+          ? styles.done : ''} ${state.activeIndex === i + 1 ? styles.active : ''}`}
+        key={id}
+      >
+        <Button
+          text={i + 1}
+          className={styles['steps-item-button']}
+          onClick={() => handleCircleClick(i + 1)}
+        />
+        {title}
+      </li>
+    ))
+  ), [state.steps, state.activeIndex]);
 
   return (
-    <div className={styles.app}>
-      <Header type='h1' text='Ввод значения' className={styles.pageHeading} />
-      <p className={styles.noMarginText}>
-        Текущее значение <code>value</code>:
-        "<output className={styles.currentValue}>{state.value}</output>"
-      </p>
-
-      {state.error && <Error text={state.error} />}
-
-      <div className={styles.buttonsContainer}>
-        <Button
-          text='Ввести новое'
-          onClick={onInputButtonClick}
-        />
-        <Button
-          text='Добавить в список'
-          isDisabled={state.value ? false : true}
-          onClick={onAddButtonClick}
-        />
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <Header type='h1' text='Инструкция по готовке пельменей' />
+        <div className={styles.steps}>
+          <div className={styles['steps-content']}>
+            {state.steps?.[state.activeIndex - 1]?.content}
+          </div>
+          <ul className={styles['steps-list']}>
+            {renderStepsList}
+          </ul>
+          <div className={styles['buttons-container']}>
+            <Button
+              text='Назад'
+              className={styles.button}
+              onClick={handlePrev}
+              isDisabled={state.activeIndex === 1}
+            />
+            <Button
+              text={state.activeIndex === state.lastStep ? 'Начать заново' : 'Далее'}
+              className={styles.button}
+              onClick={state.activeIndex === state.lastStep ? handleReboot : handleNext}
+            />
+          </div>
+        </div>
       </div>
-      <div className={styles.listContainer}>
-        <Header type='h2' text='Список:' className={styles.listHeading} />
-        <List arrListItem={state.list} />
-      </div>
-
     </div>
   );
-}
+};

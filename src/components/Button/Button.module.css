@@ -1,4 +1,4 @@
-.button {
+/* .button {
 	padding: 0.5em 0.75em;
 	background-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), 92%);
 	font-size: 18px;
@@ -18,4 +18,4 @@
 
 .button:disabled {
 	background-color: var(--disabled-color);
-}
+} */
