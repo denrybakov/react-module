@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { GameLayout } from '../GameLayout/GameLayout';
-import { findChampion, findIndexElem } from '../../utils/Utils';
+
 
 import styles from './Game.module.css';
+import { useGameLogic } from '../../hooks/useGameLogic';
 
 const initialState = {
   currentPlayer: 'X',
@@ -14,30 +15,7 @@ const initialState = {
 export const Game = () => {
   const [state, setState] = useState(initialState);
 
-  useEffect(() => {
-
-    const isChampX = findChampion(findIndexElem('X', state.field));
-    const isChampO = findChampion(findIndexElem('O', state.field));
-    const emptyField = state.field.filter(el => el === '');
-
-    if (isChampX) {
-      setState(prevState => ({
-        ...prevState, currentPlayer: 'X', isGameEnded: true
-      }));
-    }
-
-    if (isChampO) {
-      setState(prevState => ({
-        ...prevState, currentPlayer: 'O', isGameEnded: true
-      }));
-    }
-
-    if (emptyField.length === 0) {
-      setState(prevState => ({
-        ...prevState, isDraw: true, isGameEnded: true
-      }));
-    }
-  }, [state.field]);
+  useGameLogic(state, setState)
 
   const handleClickBtn = (index) => {
     if (!state.field[index] && !state.isGameEnded) {
