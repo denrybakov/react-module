@@ -18,7 +18,9 @@ export const GameLayout = ({ currentPlayer, isGameEnded, isDraw, ...fields }) =>
 )
 
 GameLayout.propTypes = {
-  currentPlayer: PropTypes.string,
-  isDraw: PropTypes.bool,
-  isGameEnded: PropTypes.bool,
+  currentPlayer: PropTypes.oneOf(['X', 'O']).isRequired,
+  isDraw: PropTypes.bool.isRequired,
+  isGameEnded: PropTypes.bool.isRequired,
+  handleClickBtn: PropTypes.func.isRequired,
+  field: PropTypes.arrayOf(PropTypes.string).isRequired,
 }

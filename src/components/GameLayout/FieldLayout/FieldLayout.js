@@ -20,7 +20,7 @@ export const FieldLayout = ({ field, handleClickBtn, isGameEnded }) => (
 )
 
 FieldLayout.propTypes = {
-  field: PropTypes.array,
-  isGameEnded: PropTypes.bool,
-  handleClickBtn: PropTypes.func
+  field: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isGameEnded: PropTypes.bool.isRequired,
+  handleClickBtn: PropTypes.func.isRequired
 }

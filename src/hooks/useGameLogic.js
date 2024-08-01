@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useEffect } from "react";
 import { findChampion, findIndexElem } from "../utils/Utils";
 
@@ -26,4 +27,14 @@ export const useGameLogic = (state, setState) => {
       }));
     }
   }, [state.field, setState]);
+}
+
+useGameLogic.propTypes = {
+  state: PropTypes.shape({
+    currentPlayer: PropTypes.oneOf(['X', 'O']).isRequired,
+    isGameEnded: PropTypes.bool.isRequired,
+    isDraw: PropTypes.bool.isRequired,
+    field: PropTypes.arrayOf(PropTypes.string).isRequired
+  }),
+  setState: PropTypes.func.isRequired
 }

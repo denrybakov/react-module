@@ -11,7 +11,7 @@ export const InformationLayout = ({ isDraw, isGameEnded, currentPlayer }) => (
 )
 
 InformationLayout.propTypes = {
-  currentPlayer: PropTypes.string,
-  isDraw: PropTypes.bool,
-  isGameEnded: PropTypes.bool,
+  currentPlayer: PropTypes.oneOf(['X', 'O']).isRequired,
+  isDraw: PropTypes.bool.isRequired,
+  isGameEnded: PropTypes.bool.isRequired,
 }

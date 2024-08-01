@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { GameLayout } from '../GameLayout/GameLayout';
 
-
 import styles from './Game.module.css';
 import { useGameLogic } from '../../hooks/useGameLogic';
 
