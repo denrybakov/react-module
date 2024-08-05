@@ -1,0 +1,17 @@
+.del {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border-radius: 10px;
+	background: url('../../assets/del.png') no-repeat center / 14px;
+
+	border: 1px solid #f43e3f;
+	background-color: #f43e3f;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+.del:hover {
+	background: url('../../assets/delr.png') no-repeat center / 14px;
+	background-color: transparent;
+}
