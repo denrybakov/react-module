@@ -1,5 +1,4 @@
 import axios from "axios";
-import { GET_ALL_POSTS_JSONPLACEHOLDER } from '../constans'
 
 export const fetchAllPosts = async (url, setSpinner) => {
   if (typeof url !== 'string') throw new Error('Error string')

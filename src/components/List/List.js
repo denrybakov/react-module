@@ -1,5 +1,3 @@
-import { CheckBox } from "../CheckBox"
-import { Delete } from "../Delete/Delete"
 
 import styles from './List.module.css'
 
