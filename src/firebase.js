@@ -12,6 +12,6 @@ const firebaseConfig = {
   databaseURL: 'https://resultschool-6f456-default-rtdb.europe-west1.firebasedatabase.app/'
 };
 
-
+// firebase
 const app = initializeApp(firebaseConfig);
 export const db = getDatabase(app)
