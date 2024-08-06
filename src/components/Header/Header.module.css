@@ -1,0 +1,87 @@
+.appHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-width: 500px;
+	max-width: 850px;
+	width: 60%;
+	margin-bottom: 35px;
+}
+
+.appSort {
+	height: 36px;
+	width: 36px;
+	border-radius: 10px;
+	border: 1px solid #d7e5f8;
+	background: url('../../assets/sort.png') no-repeat center / 17px;
+	background-color: #d7e5f8;
+	cursor: pointer;
+	transition: all 0.3s ease-in;
+}
+
+.appSort.select {
+	border: 1px solid #3277e0;
+}
+
+.appSort:hover {
+	border: 1px solid #3277e0;
+}
+
+.appBtnChoice {
+	background-color: #d7e5f8;
+	border-radius: 10px;
+	border: none;
+	padding: 11px;
+	color: #3277e0;
+	cursor: pointer;
+	margin: 0 5px;
+	border: 1px solid #d7e5f8;
+}
+
+.appBtnChoice.select {
+	border: 1px solid #3277e0;
+}
+
+.appSearch {
+	padding: 11px;
+	border-radius: 10px;
+	border: 1px solid #3277e0;
+	color: #3277e0;
+	background-color: #d7e5f8;
+}
+
+.appSearch::placeholder {
+	color: #3277e0;
+}
+
+.appSearch:focus {
+	outline: none;
+}
+
+.appBtnAdd {
+	position: relative;
+	background-color: #d7e5f8;
+	border-radius: 10px;
+	border: none;
+	padding: 11px;
+	padding-left: 30px;
+	color: #3277e0;
+	cursor: pointer;
+	margin: 0 5px;
+	border: 1px solid #d7e5f8;
+	transition: all 0.3s ease-in;
+}
+
+.appBtnAdd:hover {
+	border: 1px solid #3277e0;
+}
+
+.appBtnAdd:after {
+	content: '';
+	position: absolute;
+	top: 10px;
+	left: 8px;
+	width: 16px;
+	height: 16px;
+	background: url('../../assets/add.png') no-repeat center / contain;
+}

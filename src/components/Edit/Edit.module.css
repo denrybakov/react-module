@@ -1,0 +1,18 @@
+.edit {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border-radius: 10px;
+	background: url('../../assets/edit.png') no-repeat center / 20px;
+
+	border: 1px solid #f8b932;
+	background-color: #f8b932;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	margin-right: 15px;
+}
+
+.edit:hover {
+	background: url('../../assets/edith.png') no-repeat center / 20px;
+	background-color: transparent;
+}

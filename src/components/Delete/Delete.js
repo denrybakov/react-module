@@ -1,11 +1,5 @@
 
 import styles from './Delete.module.css'
 
-export const Delete = () => {
-
-  return (
-    <span className={styles.del}>
-
-    </span>
-  )
-}
+export const Delete = ({ id, handleDeleteTodo }) =>
+  <span className={styles.del} onClick={() => handleDeleteTodo(id)}></span>

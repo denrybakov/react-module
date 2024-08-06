@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import styles from './CheckBox.module.css'
 
-export const CheckBox = ({ id, text, completed }) => {
-
+export const CheckBox = ({ id, text, completed, handleCheckBoxToggle }) => {
   const [isChecked, setIsChecked] = useState(completed)
 
   const handleCheck = () => {
     setIsChecked(!isChecked)
+    handleCheckBoxToggle(id, text, completed)
   }
 
   return (
