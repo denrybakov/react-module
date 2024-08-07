@@ -1,11 +1,14 @@
-import axios from 'axios'
-import { GET_TODO_ID_JSON_SERVER } from '../constans'
+import { db } from '../firebase'
+import { ref, remove } from 'firebase/database'
+import { ID_TODO_FIREBASE } from '../constans'
 
-export const deleteTodo = async (idTodo, setSpinner, refreshTodo, setRefreshTodo) => {
+export const deleteTodo = async (idTodo, setSpinner) => {
   setSpinner(true)
   try {
-    await axios.delete(GET_TODO_ID_JSON_SERVER(idTodo))
-    setRefreshTodo(!refreshTodo)
+
+    const todosIdRef = ref(db, ID_TODO_FIREBASE(idTodo))
+    remove(todosIdRef)
+
   } catch (err) {
     console.error('Ошибка удаления', err)
   } finally {

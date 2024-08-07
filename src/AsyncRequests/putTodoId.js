@@ -1,20 +1,20 @@
-import axios from "axios"
-import { GET_TODO_ID_JSON_SERVER } from "../constans"
 import { dateNow } from "../utils"
+import { ref, set } from "firebase/database"
+import { db } from "../firebase"
+import { ID_TODO_FIREBASE } from '../constans'
 
 
-export const putTodoId = async (id, text, completed, setRefreshTodo, refreshTodo) => {
+
+export const putTodoId = async (id, text, completed) => {
   if (!id) throw new Error('Ошибка id')
   try {
-    await axios.put(GET_TODO_ID_JSON_SERVER(id), {
-      id,
+    const todoDbRef = ref(db, ID_TODO_FIREBASE(id))
+    set(todoDbRef, {
       text,
       completed,
       createdAt: dateNow(),
       changed: true
     })
-    setRefreshTodo(!refreshTodo)
-
   } catch (err) {
     console.error('Ошибка изменения', err)
     throw new Error('Error', err)

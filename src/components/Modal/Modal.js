@@ -10,9 +10,8 @@ export const Modal = ({
   isAdd,
   isEdit,
   handleModalTodo,
-  refreshTodo,
-  setRefreshTodo,
-  setIsModalEdit }) => {
+  setIsModalEdit
+}) => {
 
   const [value, setValue] = useState(isEdit ? text : '')
   const [errorModal, setErrorModal] = useState('')
@@ -24,16 +23,23 @@ export const Modal = ({
     } else if (value.length <= 2) {
       setErrorModal('Минимум 3 символа')
     } else if (value) {
-      postTodo(value, setRefreshTodo, refreshTodo)
+      postTodo(value)
       setValue('')
       handleModalTodo()
     }
   }
 
   const handleEdit = async () => {
-    putTodoId(id, value, completed, setRefreshTodo, refreshTodo)
-    setIsModalEdit(false)
+    if (value === '') {
+      setErrorModal('Поле не должно быть пустым')
+    } else if (value.length <= 2) {
+      setErrorModal('Минимум 3 символа')
+    } else if (value) {
+      putTodoId(id, value, completed)
+      setIsModalEdit(false)
+    }
   }
+
 
   const handleCloseModal = (e) => {
     if (refModal.current && !refModal.current.contains(e.target)) {
@@ -69,12 +75,14 @@ export const Modal = ({
               value={value}
               className={styles.modalAdd}
               placeholder={'Введите название новой задачи...'}
-              onChange={({ target }) => setValue(target.value)}
+              // eslint-disable-next-line no-sequences
+              onChange={({ target }) => (setValue(target.value), setErrorModal(''))}
             />
             <button
               className={styles.modalBtnEdit}
               // eslint-disable-next-line no-sequences
               onClick={handleEdit}>Изменить</button>
+            {errorModal && <span className={styles.err}>{errorModal}</span>}
           </div>
         )}
       </div>
