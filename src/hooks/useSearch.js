@@ -6,6 +6,11 @@ export const useSearch = (debouncedFilterTodos, todos,) => {
   const [searchTodo, setSearchTodo] = useState([])
 
   const handleSearch = (e) => {
+    if (e.target.value === '') {
+      setSearchTodo([])
+      setSearchValue(e.target.value)
+      return
+    }
     setSearchValue(e.target.value)
     debouncedFilterTodos(e.target.value, searchTodo, setSearchTodo, todos)
   }
