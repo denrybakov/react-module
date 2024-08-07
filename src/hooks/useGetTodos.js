@@ -14,7 +14,7 @@ export const useGetTodos = () => {
     const todosDbRef = ref(db, GET_TODOS_FIREBASE)
 
     return onValue(todosDbRef, (snapshot) => {
-      const loadedTodos = parseDataFirebase(snapshot.val()) || []
+      const loadedTodos = parseDataFirebase(snapshot.val() ?? [])
       const loadedTodosDone = loadedTodos.filter(todo => todo.completed)
       setTodos([...loadedTodos])
       setTodosDone([...loadedTodosDone])
